@@ -1,0 +1,131 @@
+  <div class="row">
+    <div class="col-md-10 col-12">
+      <div class="filAriane">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/parent/accueil']">Mon profil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              <span>Ajouter enfant</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="col-md-2 col-12">
+      <div class="linkBackEspace"><a [routerLink]="['/parent/accueil']"><i
+        class="la la-angle-left"></i>Retour</a></div>
+    </div>
+
+
+  </div>
+
+  <div class="contentDefaultPage">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-11 mb-4">
+        <h2>Ajouter un enfant</h2>
+      </div>
+
+      <div class="col-md-8 formDefault">
+        <form #childForm="ngForm" class="needs-validation" >
+
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-5 d-flex justify-content-center">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input"
+                       value="GARCON" name="sexe" [checked]
+                       [(ngModel)]="child.sexe" #customRadioInline1="ngModel"
+                       class="custom-control-input" ngModel>
+                <label class="custom-control-label" for="customRadioInline1">Garçon</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" value="FILLE" name="sexe" [(ngModel)]="child.sexe"
+                       class="custom-control-input" #customRadioInline1="ngModel" ngModel>
+                <label class="custom-control-label" for="customRadioInline2">Fille</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row d-flex justify-content-center mt-5">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="validationName">Nom de l'enfant</label>
+                <input type="text" class="form-control" id="validationName" name="name" id="name" placeholder="Nom de l'enfant"
+                       [(ngModel)]="child.prenom" #name="ngModel" required
+                       aria-describedby="input-group-prepend">
+                <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                     class="alert alert-danger">
+                  <div *ngIf="name.errors">Le nom de l'enfant est obligatoire.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="date">Date de naissance</label>
+                <input type="date" class="form-control" name="date" id="date" placeholder="Date de naissance"
+                       [(ngModel)]="child.birth_date" #date="ngModel" required
+                       aria-describedby="input-group-prepend"  value=""  >
+                <div *ngIf="date.invalid && (date.dirty || date.touched)"
+                     class="alert alert-danger">
+                  <div *ngIf="date.errors">La date de naissance de l'enfant est obligatoire.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-group file">
+                <span>Photo de votre enfant</span>
+                <input #file type="file" class="form-control-file" id="formControlFile" placeholder="Add profile picture" accept='image/*'
+                       required
+                       (change)="onFileChange(file.files, $event)">
+                <label for="formControlFile">Choisir la photo</label>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="row d-flex justify-content-between">
+                <div class="col-md-6 mb-3">
+                  <button id="submit" [disabled]="date.invalid || name.invalid"  type="button" class="btn save" data-toggle="modal" data-target="#addKid">Ajouter</button>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <button type="annuler2" class="btn cancel" [routerLink]="['/parent/accueil']">Annuler</button>
+                </div>
+              </div>
+              <!-- Modal -->
+              <div class="modal fade modalChosa" id="addKid" tabindex="-1" role="dialog"
+                   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle">Ajout d'un enfant</h5>
+                      <button type="button" class="closeModal" data-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </div>
+                    <div class="modal-body text-center">
+                      <img src="../../../../assets/parent/img/icon-AjoutDefault.png" alt="">
+                      <p class="mt-4">Êtes vous sûr d'ajouter {{child.prenom}} ?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <div class="row d-flex justify-content-center">
+                        <div class="col-md-8">
+                          <div class="row">
+                            <div class="col-md-6 mr-auto mb-3">
+                              <button id="annuler" type="button" class="btn btnCancelModal" data-dismiss="modal">Annuler</button>
+                            </div>
+                            <div class="col-md-6 ml-auto mb-3">
+                              <button id="submit1" type="button" class="btn btnAddKidModal" (click)="createChild()" data-dismiss="modal">Ajouter</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

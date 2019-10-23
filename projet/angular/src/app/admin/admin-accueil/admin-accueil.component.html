@@ -1,0 +1,143 @@
+<div class="content-wrapper margin_0">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Dashboard</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard v1</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="row" *ngIf="maxSize>0;else emptyList">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Data Table With Full Features</h3>
+          </div>
+          <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>Nom et Prénom</th>
+                <th>Email</th>
+                <th>Adresse</th>
+                <th>status</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let user of users">
+                <td><img class="profile-user-img img-fluid img-circle" alt=""
+                         src="{{user.user_picture_file!=null?authInterceptor.BASE_URL + '/files/'+ user.user_picture_file: defaultUserPicture}}">
+                </td>
+                <td>{{user.nom}} {{user.prenom}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.adress}}</td>
+                <td>{{user.status}}</td>
+                <td>
+                  <button class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-default"
+                          *ngIf="user.status==='SIGNUP' ||user.status==='SUSPENDED'"
+                          (click)="updateSelectedUser(user)">Accepter
+                  </button>
+                  <button class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-default"
+                          *ngIf="user.status==='VALIDATE'"
+                          (click)="updateSelectedUser(user)">Suspendre
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-header">
+          <div class="row">
+
+            <div class="col-10">
+              <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                <ul class="pagination pull-right">
+                  <li class="paginate_button page-item previous" id="example1_previous" *ngIf="currentPage>1">
+                    <a aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link"
+                       (click)="loadUsers(currentPage-1)">Previous</a>
+                  </li>
+                  <li class="paginate_button page-item previous disabled" id="example2_previous" *ngIf="currentPage<=1">
+                    <a aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                  </li>
+
+                  <li class="paginate_button page-item" *ngFor="let item of [].constructor(lengthPagination); let i = index;">
+                    <span class="page-link" *ngIf="i-currentPage==-5">...</span>
+                    <a aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link"
+                       (click)="loadUsers(i+1)" *ngIf="i-currentPage>-5 && i-currentPage<-1">{{i + 1}}</a>
+                    <a aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link current"
+                       *ngIf="currentPage==i+1">{{i + 1}}</a>
+                    <a aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link"
+                       (click)="loadUsers(i+1)" *ngIf="i-currentPage> -1 && i-currentPage<3">{{i + 1}}</a>
+                    <span class="page-link" *ngIf="i-currentPage==3">...</span>
+
+
+
+                    <!--<a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>-->
+                  </li>
+
+                  <li class="paginate_button page-item next" id="example1_next" *ngIf="currentPage<lengthPagination">
+                    <a aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link"
+                       (click)="loadUsers(currentPage+1)">Next</a>
+                  </li>
+                  <li class="paginate_button page-item next disabled" id="example2_next" *ngIf="currentPage>=lengthPagination">
+                    <a aria-controls="example1"  data-dt-idx="7" tabindex="0"  class="page-link " >Next</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Afficher {{sizePerPage*(currentPage-1) +1}} - {{(sizePerPage*currentPage>maxSize)?maxSize:sizePerPage*currentPage}} de {{maxSize}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #emptyList>
+      <div class="row">
+        <div class="col-md-12 mb-4">
+          <h2>Listes des enfants</h2>
+        </div>
+        <div class="alert alert-danger col-12" >
+          Liste des enfants est vide actuellement.
+        </div>
+      </div>
+    </ng-template>
+  </section>
+</div>
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Default Modal</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" id="VALIDATE"
+                *ngIf="selectedUser.status==='SIGNUP' ||selectedUser.status==='SUSPENDED'"
+                (click)="updateCenterStatus('VALIDATE')" data-dismiss="modal">Accepter
+        </button>
+        <button type="button" class="btn btn-danger"  id="SUSPENDED2"
+                *ngIf="selectedUser.status==='VALIDATE'"
+                (click)="updateCenterStatus('SUSPENDED')" data-dismiss="modal">Suspendre
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

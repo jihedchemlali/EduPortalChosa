@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/authenticate/signin",
+    "bodyPatterns": [{
+      "equalToJson": "{'email':'test@test.com','password':'123456'}"
+    }]
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "text/plain"
+    }
+  }
+}

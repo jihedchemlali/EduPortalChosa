@@ -1,0 +1,6 @@
+projectKey=com.atn:chosa
+serverUrl=https://sonar.allence-tunisie.com
+serverVersion=6.7.4.38452
+dashboardUrl=https://sonar.allence-tunisie.com/dashboard/index/com.atn:chosa
+ceTaskId=AWv00oIwMCxZFQU50rDj
+ceTaskUrl=https://sonar.allence-tunisie.com/api/ce/task?id=AWv00oIwMCxZFQU50rDj

@@ -1,0 +1,202 @@
+<div class="row" *ngIf="children.length>0;else emptyList">
+  <div class="col-xl-4 col-lg-4 col-md-6 col-12" *ngFor="let child of children" app-child
+       (membre)='parentDeleteChild($event)' [child]="child"></div>
+  <div class="col-xl-4 col-lg-4 col-md-6 col-12 d-xl-none d-flex align-content-center">
+    <div class="kidCards addKidCards">
+      <a [routerLink]="['/parent/enfants/creer-enfant']" id="add" ><i class="la la-plus"></i></a>
+    </div>
+  </div>
+
+</div>
+<ng-template #emptyList>
+  <div class="row">
+    <div class="alert alert-danger col-12" >
+      Liste des enfants est vide actuellement.
+    </div>
+  </div>
+
+</ng-template>
+<div class="row mt-3">
+  <div class="col-md-12 mb-4">
+    <h2>Activités pour les enfants</h2>
+  </div>
+  <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+    <a [routerLink]="['/parent/coloriage']" class="kidGames" id="coloriage">
+      <div class="picGames"><img src="../../assets/parent/img/iconColoriage.png" alt=""></div>
+      <h4 class="titleGames">Coloriage</h4>
+    </a>
+  </div>
+  <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+    <a href="" class="kidGames">
+      <div class="picGames"><img src="../../assets/parent/img/iconLogique.png" alt=""></div>
+      <h4 class="titleGames">Logique et réflexion</h4>
+    </a>
+  </div>
+  <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+    <a href="" class="kidGames">
+      <div class="picGames"><img src="../../assets/parent/img/iconDessin.png" alt=""></div>
+      <h4 class="titleGames">Dessins à reproduire</h4>
+    </a>
+  </div>
+  <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+    <a href="" class="kidGames">
+      <div class="picGames"><img src="../../assets/parent/img/iconMemoire.png" alt=""></div>
+      <h4 class="titleGames">Mémoire</h4>
+    </a>
+  </div>
+  <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+    <a href="" class="kidGames">
+      <div class="picGames"><img src="../../assets/parent/img/iconAmusant.png" alt=""></div>
+      <h4 class="titleGames">Récréatifs et amusants</h4>
+    </a>
+  </div>
+  <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+    <a href="" class="kidGames">
+      <div class="picGames"><img src="../../assets/parent/img/iconPuzzles.png" alt=""></div>
+      <h4 class="titleGames">Puzzles</h4>
+    </a>
+  </div>
+</div>
+
+<!-- Modal Enfant-->
+<div class="modal fade modalChosa" id="deleteChildModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle2"> Êtes vous sûr de vouloir supprimer {{selectedChild.prenom}}</h5>
+        <button type="button" class="closeModal" data-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="../../../assets/parent/img/icon-trashDefault.png" alt="" >
+
+        <p class="mt-4">
+          {{selectedChild.prenom}} sera effacer de façon définitive.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6 mr-auto mb-3">
+                <button type="button" class="btn btnCancelModal" data-dismiss="modal">Annuler</button>
+              </div>
+              <div class="col-md-6 ml-auto mb-3">
+                <button id="supprimer" type="button" (click)="deleteChild(selectedChild)" class="btn btnDeleteKidModal" data-dismiss="modal">Supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Enfant-->
+<div class="modal fade modalChosa" id="retirerDuCentreModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Êtes-vous sûr de vouloir retirer {{selectedChild.prenom}}?</h5>
+        <button type="button" class="closeModal" data-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="../../../assets/parent/img/icon-trashDefault.png" alt="">
+        <p class="mt-4">{{selectedChild.prenom}} sera retirer de façon définitive.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6 mr-auto mb-3">
+                <button type="button" id="annuler" class="btn btnCancelModal" data-dismiss="modal">Annuler</button>
+              </div>
+              <div class="col-md-6 ml-auto mb-3">
+                <button type="button" id="supprimer2" (click)=removeChildFromEcole(selectedChild) class="btn btnDeleteKidModal" data-dismiss="modal">Supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade modalChosa editForm" id="modifierEnfantModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle3">Modifier les informations de {{selectedChild.prenom}}</h5>
+        <button type="button" class="closeModal" data-dismiss="modal" aria-label="Close" (click)="reset()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row formDefault">
+
+
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="validationName">Nom de l'enfant</label>
+              <input type="text" class="form-control" id="validationName"
+                     aria-describedby="input-group-prepend" placeholder="" name="prenom" [(ngModel)]="selectedChild.prenom" value="{{selectedChild.prenom}}" >
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="birth_date">Date de naissance</label>
+              <input type="date" class="form-control" id="birth_date" name="birth_date" [(ngModel)]="selectedChild.birth_date"
+                     aria-describedby="input-group-prepend" placeholder="" value="{{selectedChild.birth_date}}" >
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group file">
+              <span>Photo de votre enfant</span>
+              <input #file type="file" class="form-control-file"  (change)="onFileChange(file.files, $event)" accept='image/*' id="formControlFile" placeholder="Add profile picture">
+              <label for="formControlFile">Choisir la photo</label>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6 mr-auto mb-3">
+                <button id="annulerMod" type="button" class="btn btnCancelModal" data-dismiss="modal" (click)="reset()">Annuler</button>
+              </div>
+              <div class="col-md-6 ml-auto mb-3">
+                <button id="enregistrer" type="button" class="btn btnAddKidModal" (click)=updateChild(selectedChild) data-dismiss="modal">Modifier</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-adherer-enfant-modal [selectedChild]="selectedChild" *ngIf="children.length>0"></app-adherer-enfant-modal>

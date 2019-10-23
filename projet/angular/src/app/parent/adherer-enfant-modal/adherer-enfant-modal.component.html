@@ -1,0 +1,92 @@
+
+<!-- Modal -->
+<div class="modal fade modalChosa editForm bd-example-modal-lg" id="adhererChildModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Adhérer mon enfant à un jardin d’enfant</h5>
+        <button type="button" class="closeModal" data-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body choixJarinEnfant">
+        <div class="row formDefault">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="search">Filtrer par ville :</label>
+              <input type="text" class="form-control" id="search" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Filtrer par ville"
+                     aria-describedby="input-group-prepend" value="" >
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4" *ngFor="let center of centers | filterCenterPerVille:searchText" app-center-card [center]="center" (membre)="selectionner($event)">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+
+            <div class="paginationNbr">
+              <div class="row d-flex">
+
+                <div class="ol-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                          <span aria-hidden="true"><i class="la la-angle-double-left"></i></span>
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                          <span aria-hidden="true"><i class="la la-angle-left"></i></span>
+                        </a>
+                      </li>
+                      <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">4</a></li>
+                      <li class="page-item"><a class="page-link" href="#">5</a></li>
+                      <li class="page-item"><a class="page-link" href="#">...</a></li>
+                      <li class="page-item">
+                        <a class="page-link active" href="#" aria-label="Next">
+                          <span aria-hidden="true"><i class="la la-angle-right"></i></span>
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link active" href="#" aria-label="Next">
+                          <span aria-hidden="true"><i class="la la-angle-double-right"></i></span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6 mr-auto mb-3">
+                <button type="button" class="btn btnCancelModal" data-dismiss="modal">Annuler</button>
+              </div>
+              <div class="col-md-6 ml-auto mb-3">
+                <button type="button" class="btn btnAddKidModal" [disabled]="selectedElements==null || selectedElements.length<1" (click)="choisirCenter()" data-dismiss="modal">Adhérer</button>
+              </div>
+              <div class="col-md-6 ml-auto mb-3" >
+<!--                <button type="button" id="choisir" (click)="choisirCenter(selectedChild,center)" class="btn btnAddKidModal">Adhérer</button>-->
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

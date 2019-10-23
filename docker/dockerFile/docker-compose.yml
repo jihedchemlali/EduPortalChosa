@@ -1,0 +1,41 @@
+version: "3"
+
+networks:
+  network:
+    driver: bridge
+
+#il faut executer les script suivants:
+#  script:
+#    - mkdir ./mount/data
+#    - mkdir ./mount/data/mysql
+#    - sudo chown -R 999:999 ./mount/data/mysql
+
+services:
+
+  newdocker:
+    container_name: newdocker
+    image: walidmansia/allence-tunisie:yamallam-0.9.100
+    environment:
+      - MYSQL_ROOT_PASSWORD=all0.1EN2.3ce
+      - DB_NAME=database_yamallam
+      - NEW_URL_API=http://api.yamallam.com:86
+    volumes:
+      - ./mount/data/mysql:/var/lib/mysql
+    ports:
+      - 86:8080
+    networks:
+      - network
+  proxy:
+    container_name: nginx
+    image: nginx
+    volumes: # mount custom config at runtime
+      - ./mount/config/nginx/conf/default.conf:/etc/nginx/conf.d/default.conf
+      - ./mount/config/nginx/page/:/usr/share/nginx/html/
+      - ./mount/config/https/:/usr/share/nginx/https/
+    links:
+      - newdocker:newdocker
+    ports:
+      - 80:80
+#      - 443:443
+    networks:
+      - network

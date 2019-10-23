@@ -1,0 +1,10 @@
+.facebook {
+  background: #2d1cc8 !important;
+  color: #ffffff !important;
+}
+
+.facebook:hover {
+  color: #2d1cc8 !important;
+  background: #ffffff !important;
+  border-color: #2d1cc8 !important;
+}

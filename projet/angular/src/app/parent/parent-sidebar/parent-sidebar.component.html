@@ -1,0 +1,34 @@
+<div class="detailEspace stickyElement">
+    <div class="photoNameDetailEspace">
+      <div class="nameDetailEspace">{{user?.prenom}} {{user?.nom}}</div>
+      <div class="photoDetailEspace">
+        <a routerLink="." class="editPhotoDetailEspace" (click)="photoInput.click()">
+          <i class="fas fa-pen" data-toggle="tooltip" data-placement="top" title="Changer la photo"></i>
+        </a>
+        <img src="{{imageUrl}}" alt="" id="imageUrl">
+      </div>
+    </div>
+  <form class="d-none">
+    <input #photoInput type="file" accept='image/*'
+          name="file" required (change)="uploadPicture($event)">
+  </form>
+  <div class="infoEspace">
+    <ul>
+      <li *ngIf="user.adress!= null">
+        <img src="../../../assets/parent/img/map.svg" alt="">
+        {{user.adress}}
+      </li>
+      <li><a><img src="../../assets/parent/img/mail.svg" alt=""> {{user?.email}}</a></li>
+      <li *ngIf="user.phone!= null"><img src="../../../assets/parent/img/telephone.svg" alt=""> +216 {{user?.phone}}</li>
+      <li *ngIf="user.facebook_Id!= null">
+        <a href="https://facebook.com/{{user?.facebook_Id}}" target="_blank"><img src="../../../assets/parent/img/facebook.svg"  alt=""> {{user?.facebook_Id}}</a>
+      </li>
+      <li *ngIf="user.google_Id!= null">
+        <a><img src="../../../assets/parent/img/linkedin.svg" alt=""> {{user?.google_Id}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="addKid">
+    <a [routerLink]="['/parent/enfants/creer-enfant']" id="add" [hidden]="router.url.indexOf('parent/enfants/creer-enfant') == 1">Ajouter un enfant</a>
+  </div>
+</div>

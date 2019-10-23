@@ -1,0 +1,70 @@
+<project basedir=".">
+
+<target name="init">
+    <exec executable="mkdir">
+        <arg value="-p"/>
+        <arg value="../docker/mount/springboot"/>
+    </exec>
+    <exec executable="mkdir">
+        <arg value="-p"/>
+        <arg value="../docker/mount/data"/>
+    </exec>
+    <exec executable="mkdir">
+        <arg value="-p"/>
+        <arg value="../docker/mount/data/front"/>
+    </exec>
+</target>
+<target name="deploy">
+    <antcall target="stop"></antcall>
+    <exec executable="mvn" dir="../projet/">
+        <arg value="clean"/>
+        <arg value="-DskipTests"/>
+    </exec>
+    <exec executable="mvn" dir="../projet/">
+        <arg value="install"/>
+        <arg value="-DskipTests"/>
+    </exec>
+    <exec executable="cp" dir=".">
+        <arg value="../projet/chosa-api/target/myservice.jar"/>
+        <arg value="../docker/mount/springboot/"/>
+    </exec>
+
+    <exec executable="ng" dir="../projet/angular">
+        <arg value="build"/>
+        <arg value="--prod"/>
+    </exec>
+    <exec executable="cp" dir=".">
+        <arg value="-r"/>
+        <arg value="../projet/angular/dist/front/"/>
+        <arg value="../docker/mount/data/"/>
+    </exec>
+    <exec executable="mvn" dir="../projet/">
+        <arg value="clean"/>
+    </exec>
+    <exec executable="rm">
+        <arg value="-r"/>
+        <arg value="../projet/angular/dist"/>
+    </exec>
+    <antcall target="start"></antcall>
+</target>
+<target name="start">
+    <exec executable="docker-compose" dir="../docker/">
+        <arg value="up"/>
+        <arg value="-d"/>
+    </exec>
+</target>
+<target name="stop">
+    <exec executable="docker-compose" dir="../docker/">
+        <arg value="down"/>
+    </exec>
+</target>
+<target name="restart">
+    <antcall target="stop"></antcall>
+    <antcall target="start"></antcall>
+</target>
+<target name="status">
+    <exec executable="docker-compose" dir="../docker/">
+        <arg value="ps"/>
+    </exec>
+</target>
+</project>

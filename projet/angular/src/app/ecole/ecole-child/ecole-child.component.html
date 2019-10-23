@@ -1,0 +1,40 @@
+<div class="kidCards">
+  <a *ngIf="child.status!=='ONLOAD'" routerLink="./" class="deleteKid" id="deleteKid" (click)="deleteChild()" data-toggle="modal" data-target="#retirerDuCentre"><i
+    class="fas fa-times"></i></a>
+  <div class="photoKidCards">
+    <img src="{{imageUrl}}" id="imageUrl" alt="" routerLink="../enfants/{{child.id}}">
+  </div>
+  <div class="nameKidCards" id="prenom">
+    <h4>{{child?.prenom}}</h4>
+  </div>
+  <div class="ageKidCards" id="" birth_date>
+    <h4>{{child?.birth_date | age}}</h4>
+  </div>
+  <div class="buttonCardKid" *ngIf="child.status==='ACCEPTED'">
+    <div class="buttonSuivie" id="deleteACCEPTED">
+      <a routerLink="./" class="retirer" id="retirerACCEPTED" (click)="updateEnfant('IGNORED')" data-toggle="modal">Retirer du suivie</a>
+    </div>
+    <div class="buttonAddActivite" id="addACCEPTED" *ngIf="child.status==='ACCEPTED'">
+      <a routerLink="../enfants/{{child.id}}" class="retirer"
+         id="ajouterActivityACCEPTED">Ajouter des activités</a>
+    </div>
+  </div>
+
+  <div class="buttonCardKid" *ngIf="child.status==='ONLOAD'">
+    <div class="buttonSuivie" id="deleteONLOAD">
+      <a routerLink="." class="delete" id="delete" (click)="deleteChild()" data-toggle="modal"
+         data-target="#refuserDemande">Refuser la demande</a>
+    </div>
+    <div class="buttonAddActivite" id="addONLOAD">
+      <a routerLink="." class="retirer" id="retirer" (click)="updateEnfant('ACCEPTED')"
+         id="ajouterActivityONLOAD">Accepter la demande</a>
+    </div>
+  </div>
+
+  <div class="buttonCardKid" *ngIf="child.status==='IGNORED'">
+    <div class="buttonSuivie" id="attenteIGNORED">
+      <a routerLink="." class="attente" id="attente" (click)="updateEnfant('ACCEPTED')"
+         id="ajouterActivityIGNORED">Suivre</a>
+    </div>
+  </div>
+</div>

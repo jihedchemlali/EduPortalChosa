@@ -1,0 +1,383 @@
+<div class="container-fluid bgBandeau" id="home" #home>
+
+  <app-front-header>[user]="user" [imageUrl]="imageUrl"</app-front-header>
+
+  <div class="container bandeau">
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-12 col-12 d-flex align-content-center flex-wrap">
+        <div class="logoBandeau mb-2">
+          <img src="../../assets/front/img/chosa-color.svg" alt="">
+        </div>
+        <h2 class="titleBandeau mt-4">La plateforme de suivi <br>de votre enfant</h2>
+        <p class="contentbandeau mt-2">
+          <b> CHOSA </b> est une plate forme qui permet à chaque parent, là ou il se trouve de suivre
+          la journée de son enfant et de réagir à temps si besoin se fait sentir.
+        </p>
+        <div class="input-group rechercheJardin mt-5" *ngIf="test == false">
+          <div class="input-group-prepend">
+                  <span class="input-group-text border-0 pr-1">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </span>
+          </div>
+          <input type="text" class="form-control border-0 px-2" id="validationRecherche" placeholder="Rechercher un jardin d’enfant">
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-6 col-12 d-none d-lg-block d-xl-block">
+        <img src="../../assets/front/img/imgEnfantBandeau.png" alt="" class="img-fluid">
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<main>
+
+  <section class="container-fluid commentCaMarche" id="commentCaMarche" *ngIf="test == false">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="title-orange">Comment ça marche</h2>
+        </div>
+        <div class="col-md-12 mt-5 mb-5">
+          <img src="../../assets/front/img/comment-ca-marche.png" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="container-fluid services" id="services" *ngIf="test == true">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-5">
+          <h2 class="titleServices">Services</h2>
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mt-2">
+
+          <a href="./services.html#suivie" class="cardServices mb-4 text-decoration-none">
+            <div class="card-body">
+              <img src="../../assets/front/img/iconSuivi.png" alt="" class="mx-auto d-block mt-4">
+              <span class="cardServicesTitle mt-4 mb-4">Suivie</span>
+            </div>
+          </a>
+
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mt-2">
+
+          <a href="./services.html#actualite" class="cardServices mb-4 text-decoration-none">
+            <div class="card-body">
+              <img src="../../assets/front/img/iconActualites.png" alt="" class="mx-auto d-block mt-4">
+              <span class="cardServicesTitle mt-4 mb-4">Actualités</span>
+            </div>
+          </a>
+
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mt-2">
+
+          <a href="./services.html#profil-perso" class="cardServices mb-4 text-decoration-none">
+            <div class="card-body">
+              <img src="../../assets/front/img/iconProfilPerso.png" alt="" class="mx-auto d-block mt-4">
+              <span class="cardServicesTitle mt-4 mb-4">Profil personnel</span>
+            </div>
+          </a>
+
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mt-2">
+
+          <a href="./services.html#activite" class="cardServices mb-4 text-decoration-none">
+            <div class="card-body">
+              <img src="../../assets/front/img/iconActivites.png" alt="" class="mx-auto d-block mt-4">
+              <span class="cardServicesTitle mt-4 mb-4">Activités</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <section class="container-fluid presentation" id="presentation" >
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-12 mb-3">
+          <h2 class="titlePresentation">Présentation</h2>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mt-2 mb-3 d-flex align-content-center flex-wrap">
+          <p>
+            <b> CHOSA </b> est une plate forme qui permet à chaque parent, là ou il se trouve de suivre
+            la journée de son enfant et de réagir à temps si besoin se fait sentir
+            grâce a notre plate forme nous permettons en outre aux parents de communiquer
+            plus aisément avec les animatrices ou directeurs grâce au réseau social dédié.<br><br>
+
+            Chosa rend la communication simple, instantanée et sécurisée.
+            Des moments de vie de la classe à partager ? Un message à faire passer ?
+            En quelques clics, avec chosa , les parents sont informés .
+            Oubliez les photocopies dans les cahiers de liaison papiers
+            Que ce soit pour les messages du quotidien à transmettre
+            aux parents (informations, moments de vie de la classe à partager,
+            sorties scolaires, classes découvertes, etc.), avec chosa ,
+            tous les parents sont instantanément informés.
+          </p>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-5">
+          <img src="../../assets/front/img/imgPresentation.png" alt="" class="img-fluid mx-auto d-block">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-fluid activites" *ngIf="test == true">
+    <div class="container">
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <h2 class="titleActivites">Activités de la semaine</h2>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mt-5">
+          <a href="#" class="blocActivite mb-4 text-decoration-none">
+
+            <img src="../../assets/front/img/imgActivite01.png" alt="">
+            <span class="titleBlocActivite mx-auto mt-4 mb-4">Morbi tincidunt massa</span>
+
+          </a>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mt-5">
+          <a href="#" class="blocActivite mb-4 text-decoration-none">
+
+            <img src="../../assets/front/img/imgActivite02.png" alt="">
+            <span class="titleBlocActivite mx-auto mt-4 mb-4">Suspendisse vitae</span>
+
+          </a>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mt-5">
+          <a href="#" class="blocActivite mb-4 text-decoration-none">
+
+            <img src=".../../assets/front/img/imgActivite03.png" alt="">
+            <span class="titleBlocActivite mx-auto mt-4 mb-4">Mauris malesuada eleifend</span>
+
+          </a>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mt-5">
+          <a href="#" class="blocActivite mb-4 text-decoration-none">
+
+            <img src="../../assets/front/img/imgActivite04.png" alt="">
+            <span class="titleBlocActivite mx-auto mt-4 mb-4">Cras id pretium mauris</span>
+
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-fluid services" id="services" *ngIf="test == false">
+    <div class="container pb-5">
+
+      <div class="row">
+        <div class="col-md-12 mb-5">
+          <h2 class="titleServices">Services</h2>
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mt-2">
+
+          <div class="vignetteServices">
+              <span class="icon-service">
+                <img src="../../assets/front/img/icon-suivi.png" alt="">
+              </span>
+            <h3>Suivie</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Donec sed diam id ex ultrices fermentum vitae.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mt-2">
+
+          <div class="vignetteServices">
+                  <span class="icon-service">
+                    <img src="../../assets/front/img/icon-actualites.png" alt="">
+                  </span>
+            <h3>Actualités</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Donec sed diam id ex ultrices fermentum vitae.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mt-2">
+
+          <div class="vignetteServices">
+                  <span class="icon-service">
+                    <img src="../../assets/front/img/icon-profil-perso.png" alt="">
+                  </span>
+            <h3>Profil personnel</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Donec sed diam id ex ultrices fermentum vitae.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mt-2">
+
+          <div class="vignetteServices">
+                  <span class="icon-service">
+                    <img src="../../assets/front/img/icon-activites.png" alt="">
+                  </span>
+            <h3>Activités</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Donec sed diam id ex ultrices fermentum vitae.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+
+
+  <section class="container-fluid contact" id="contact">
+    <div class="container">
+      <div class="row ">
+        <div class="col-md-12">
+          <h2 class="titleContact">Contact</h2>
+        </div>
+      </div>
+
+
+      <form #declarativeForm="ngForm" (ngSubmit)="contact()" class="needs-validation mt-5">
+        <div class="row justify-content-center">
+
+          <div class="col-md-3">
+            <div class="form-group">
+
+              <input type="text" class="form-control" id="validationName" aria-describedby="input-group-prepend"
+                     placeholder="Nom et Prénom" required [(ngModel)]="name"  name="name">
+              <div class="invalid-feedback">
+                Entrez Votre Nom et Prénom
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+
+              <input type="email" class="form-control" id="validationEmail"
+                     aria-describedby="input-group-prepend" [(ngModel)]="email" name="email" placeholder="Adresse email" required>
+              <div class="invalid-feedback">
+                Entrez une adresse mail valid
+              </div>
+              </div>
+          </div>
+
+        </div>
+
+        <div class="row d-flex align-items-center justify-content-center mt-4">
+          <div class="col-md-6">
+            <div class="form-group">
+
+              <textarea class="form-control" id="validationMsg" rows="5" placeholder="Message" required [(ngModel)]="message" name="message"></textarea>
+              <div class="invalid-feedback">
+                Entrez Votre Message
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row d-flex mt-5 align-items-center justify-content-center">
+        <ngx-recaptcha2 [(ngModel)]="declarativeFormCaptchaValue" #captchaElem required  name="recaptcha"
+                        [siteKey]="siteKey"
+                        (reset)="handleReset()"
+                        (expire)="handleExpire()"
+                        (load)="handleLoad()"
+                        (success)="handleSuccess($event)"
+                        [size]="size"
+                        [hl]="lang"
+                        [type]="type"
+                        >
+        </ngx-recaptcha2>
+        </div>
+        <div class="row d-flex mt-5 align-items-center justify-content-center">
+
+          <button [disabled]="!declarativeForm.valid" type="submit" class="btn btn-outline-success envoyer ">Envoyer</button>
+
+        </div>
+
+      </form>
+
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="container-fluid footer">
+  <div class="topFooter"></div>
+  <div class="bottomFooter">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-5">
+          <div class="logoFooter mb-3">
+            <img src="../../assets/front/img/chosa-white.svg" alt="">
+          </div>
+          <ul class="list-group info mb-3">
+            <li><i class="fas fa-phone fa-flip-horizontal"></i>+216 71 658 364</li>
+            <li><a href="http://"><i class="far fa-envelope"></i>contact@chosa.com</a></li>
+
+          </ul>
+          <ul class="list-group list-group-horizontal">
+            <li><a href="http://"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="http://"><i class="fab fa-twitter-square"></i></a></li>
+            <li><a href="http://"><i class="fab fa-linkedin"></i></a></li>
+          </ul>
+
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+          <div class="row">
+            <div class="col-md-4 col-6">
+              <h5>Information</h5>
+              <ul>
+                <li><a href="" routerLink="/inscription">Inscription</a></li>
+                <li><a href="" routerLink="/login">Connexion</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4 col-6">
+              <h5>Société</h5>
+              <ul>
+                <li><a href="#presentation">Présentation</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4 col-6">
+              <h5>Compte</h5>
+              <ul>
+                <li><a  href="javascript:void(0)" (click)="profil()">Profil</a></li>
+                <li><a  href="javascript:void(0)" (click)="surfParametre()">Parametre</a></li>
+                <li><a  href="javascript:void(0)" (click)="surfNotifications()">Notifications</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer2 mt-2">
+      <div class="col-md-12 col-12">
+        <p>© 2019 Chosa. Tous droits réservés.</p>
+      </div>
+    </div>
+  </div>
+</footer>

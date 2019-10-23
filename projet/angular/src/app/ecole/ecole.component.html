@@ -1,0 +1,15 @@
+<app-ecole-header [user]="user" [imageUrl]="imageUrl"></app-ecole-header>
+<main class="container-fluid">
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 d-none d-xl-block">
+        <app-ecole-sidebar [user]="user" [imageUrl]="imageUrl" [ecole]="ecole"
+            (membre)='updatePhotoLink()'></app-ecole-sidebar>
+      </div>
+      <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</main>
+<app-ecole-footer></app-ecole-footer>

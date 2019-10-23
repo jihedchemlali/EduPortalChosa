@@ -1,0 +1,155 @@
+<div class="row" *ngIf="maxSize>0;else emptyList">
+  <div class="col-xl-4 col-lg-4 col-md-6 col-12" *ngFor="let child of children" app-ecole-child
+       (membre)='retirerEnfant($event)' [child]="child" [ecole]="ecole">
+  </div>
+  <div class="col-md-12">
+    <div class="paginationNbr">
+      <div class="row d-flex">
+        <div class="ol-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <nav aria-label="Page navigation">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" (click)="getChildrenOfCenters(1)" aria-label="Previous" *ngIf="currentPage>1">
+                  <span aria-hidden="true"><i class="la la-angle-double-left"></i></span>
+                </a>
+                <a class="page-link disabled" aria-label="Previous" *ngIf="currentPage<=1">
+                  <span aria-hidden="true"><i class="la la-angle-double-left"></i></span>
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" aria-label="Previous" (click)="getChildrenOfCenters(currentPage-1)"
+                   *ngIf="currentPage>1">
+                  <span aria-hidden="true"><i class="la la-angle-left"></i></span>
+                </a>
+                <a class="page-link disabled" aria-label="Previous" *ngIf="currentPage<=1">
+                  <span aria-hidden="true"><i class="la la-angle-left"></i></span>
+                </a>
+              </li>
+              <li class="page-item" *ngFor="let item of [].constructor(lengthPagination); let i = index;">
+                <span class="page-link" *ngIf="i-currentPage==-5">...</span>
+                <a class="page-link" (click)="getChildrenOfCenters(i+1)"
+                   *ngIf="i-currentPage>-5 && i-currentPage<-1">{{i + 1}}</a>
+                <a class="page-link active" *ngIf="currentPage==i+1">{{i + 1}}</a>
+                <a class="page-link" (click)="getChildrenOfCenters(i+1)"
+                   *ngIf="i-currentPage> -1 && i-currentPage<3">{{i + 1}}</a>
+                <span class="page-link" *ngIf="i-currentPage==3">...</span>
+              </li>
+              <li class="page-item">
+                <a class="page-link" aria-label="Next" (click)="getChildrenOfCenters(currentPage+1)"
+                   *ngIf="currentPage<lengthPagination">
+                  <span aria-hidden="true"><i class="la la-angle-right"></i></span>
+                </a>
+                <a class="page-link disabled" aria-label="Next" *ngIf="currentPage>=lengthPagination">
+                  <span aria-hidden="true"><i class="la la-angle-right"></i></span>
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" aria-label="Next" *ngIf="currentPage>=lengthPagination">
+                  <span aria-hidden="true"><i class="la la-angle-double-right"></i></span>
+                </a>
+                <a class="page-link" aria-label="Next" (click)="getChildrenOfCenters(lengthPagination)"
+                   *ngIf="currentPage<lengthPagination">
+                  <span aria-hidden="true"><i class="la la-angle-double-right"></i></span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <form class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 form-inline d-flex justify-content-end">
+          <div class="form-group">
+            <select class="custom-select nbr" id="typeData" (change)="setSizePerPage($event.target.value)">
+              <option value="6" selected>6</option>
+              <option value="9">9</option>
+              <option value="12">12</option>
+              <option value="18">18</option>
+            </select>
+            <label class="ml-3">Afficher {{sizePerPage*(currentPage-1) +1}} - {{(sizePerPage*currentPage>maxSize)?maxSize:sizePerPage*currentPage}} de {{maxSize}}</label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #emptyList>
+  <div class="row">
+<!--    <div class="col-md-12 mb-4">-->
+<!--      <h2>Listes des enfants</h2>-->
+<!--    </div>-->
+    <div class="alert alert-danger col-12" >
+      Liste des enfants est vide actuellement.
+    </div>
+  </div>
+</ng-template>
+<!-- Modal -->
+
+<div class="modal fade modalChosa" id="retirerDuCentre" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Suppression d'un enfant</h5>
+        <button type="button" class="closeModal" data-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="../../../assets/ecole/img/icon-RetirerDefault.png" alt="">
+        <p class="mt-4"> Êtes vous sûr de retirer <b>{{nomChildComplet}}</b> ?</p>
+      </div>
+      <div class="modal-footer">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6 mr-auto mb-3">
+                <button type="button" class="btn btnCancelModal" data-dismiss="modal">Annuler</button>
+              </div>
+              <div class="col-md-6 ml-auto mb-3">
+                <button type="button" class="btn btnDeleteKidModal" (click)="removeChildFromEcole()" data-dismiss="modal">Supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+
+
+
+<div class="modal fade modalChosa" id="refuserDemande" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Réfuser la demande</h5>
+        <button type="button" class="closeModal" data-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="../../../assets/ecole/img/icon-RetirerDefault.png" alt="">
+        <p class="mt-4">Êtes vous sûr de vouloir réfuser {{nomChildComplet}}?</p>
+      </div>
+      <div class="modal-footer">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6 mr-auto mb-3">
+                <button type="button" class="btn btnCancelModal" data-dismiss="modal" id="buttonAnnuler">Annuler</button>
+              </div>
+              <div class="col-md-6 ml-auto mb-3">
+                <button type="button" class="btn btnDeleteKidModal" (click)=refuserDemande() data-dismiss="modal" id="buttonSupprimer">Réfuser</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

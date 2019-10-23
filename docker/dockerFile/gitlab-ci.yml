@@ -1,0 +1,213 @@
+image: ntfactory/ci-tool:0.0.2
+cache:
+  paths:
+    - $HOME/.m2/
+variables:
+  MAVEN_CLI_OPTS: "-s ci/settings.xml -B"
+  SONAR_PROJECT_NAME: "chosa"
+stages:
+  - validate
+  - compile
+  - test
+  - package
+  - verify
+  - install
+  - deploy
+  - deploy-front
+  - docker_hub
+  - documentation
+  - release
+before_script:
+  ##
+  ## Install ssh-agent if not already installed, it is required by Docker.
+  ## (change apt-get to yum if you use an RPM-based image)
+  ##
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
+  ##
+  ## Run ssh-agent (inside the build environment)
+  ##
+  - eval $(ssh-agent -s)
+  ##
+  ## Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+  ## We're using tr to fix line endings which makes ed25519 keys work
+  ## without extra base64 encoding.
+  ## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
+  ##
+  - mkdir -p ~/.ssh
+  #- echo -n "$PROJECT_SSH_KEY" | ssh-add - >/dev/null
+  - ssh-add <(echo "$PROJECT_SSH_KEY")
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  - git config --global user.email "ammar.chebbi@allence-tunisie.com"
+  - git config --global user.name "Ammar Chebbi"
+
+
+  ##
+  ## Create the SSH directory and give it the right permissions
+  ##
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+
+  ##
+  ## Optionally, if you will be using any Git commands, set the user name and
+  ## and email.
+  ##
+  #- git config --global user.email "user@example.com"
+  #- git config --global user.name "User name"
+  - "GIT_COMMENT=$(git log -1 --pretty=%B)"
+  - "cd projet && MVN_VERSION=$(mvn -q  -Dexec.executable=echo  -Dexec.args='${project.version}'  --non-recursive  exec:exec)"
+  - "echo $MVN_VERSION && cd ../"
+
+maven-validate:
+  stage: validate
+  environment: staging
+  script:
+    - "cd projet && mvn $MAVEN_CLI_OPTS validate"
+  artifacts:
+  except:
+    - tags
+  when: on_success
+
+
+maven-compile:
+  stage: compile
+  environment: staging
+  dependencies:
+    - maven-validate
+  script: "cd projet && mvn $MAVEN_CLI_OPTS compile"
+  except:
+    - tags
+  artifacts:
+  when: on_success
+
+
+maven-sonar:
+  stage: test
+  environment: staging
+  dependencies:
+    - maven-compile
+  script: "cd projet && mvn $MAVEN_CLI_OPTS verify sonar:sonar -Dsonar.scm.disabled=True -D sonar.projectName=$SONAR_PROJECT_NAME -Dsonar.gitlab.commit_sha=$CI_BUILD_REF -Dsonar.gitlab.ref_name=$CI_BUILD_REF_NAME"
+  except:
+    - tags
+  artifacts:
+  when: on_success
+
+
+postman_job:
+  stage: test
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq curl
+    - curl -sL https://deb.nodesource.com/setup_8.x
+    - apk update
+    - npm install newman -g
+  script:
+    - "cd projet/shared && newman run Chosa_Collection.json"
+  when: manual
+
+
+angular-test :
+  stage: test
+  before_script:
+    - apt-get install chromium-browser -y
+  script: "cd projet/angular && npm install && npm test"
+  when: manual
+
+maven-package:
+  stage: package
+  environment: staging
+  dependencies:
+    - maven-sonar
+  script: "cd projet && mvn $MAVEN_CLI_OPTS package -DskipTests "
+  except:
+    - tags
+  artifacts:
+  when: on_success
+
+maven-verify:
+  stage: verify
+  environment: staging
+  dependencies:
+    - maven-package
+  script: "cd projet && mvn $MAVEN_CLI_OPTS verify "
+  artifacts:
+  when: on_success
+
+docker-deploy-hub:
+  stage: docker_hub
+  environment: staging
+  dependencies:
+    - maven-deploy-nexus
+  script:
+    - "if [[ $MVN_VERSION == *\"SNAPSHOT\"* ]]; then        exit ; else    echo $MVN_VERSION ;    fi"
+    - "apt-get install -y docker.io"
+    - "cd docker/dockerFile"
+    - "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
+    - "docker build -t walidmansia/allence-tunisie:yamallam-$MVN_VERSION --build-arg VERSION_PROJECT=$MVN_VERSION ."
+    - "docker push walidmansia/allence-tunisie:yamallam-$MVN_VERSION"
+  when: on_success
+  only:
+    - developpement
+  except:
+    - tags
+  artifacts:
+
+maven-deploy-nexus:
+  stage: deploy
+  environment: staging
+  dependencies:
+    - maven-package
+    - maven-sonar
+  only:
+    - developpement
+  script:
+    - "cd projet && mvn $MAVEN_CLI_OPTS deploy -DskipTests "
+  when: on_success
+  except:
+    - tags
+  artifacts:
+
+
+maven-deploy-front-nexus:
+  stage: deploy-front
+  environment: staging
+  dependencies:
+    - maven-deploy-nexus
+  only:
+    - developpement
+  script:
+    - "npm install -g @angular/cli"
+    - "apt-get install -y zip"
+    - "cd projet/angular && npm install && ng build --prod && zip -r angular7.zip dist/angular/* "
+    - "if [[ $MVN_VERSION == *\"SNAPSHOT\"* ]]; then        cd ../ && mvn deploy:deploy-file -DgroupId=com.atn.projet -DartifactId=project-front -Dversion=$MVN_VERSION -DgeneratePom=false -Dpackaging=zip -DrepositoryId=nexus.snapshots -Durl=https://archiva.allence-tunisie.com/repository/maven-snapshots/ -Dfile=angular/angular7.zip $MAVEN_CLI_OPTS ;  fi"
+    - "if [[ $MVN_VERSION != *\"SNAPSHOT\"* ]]; then        cd ../ && mvn deploy:deploy-file -DgroupId=com.atn.projet -DartifactId=project-front -Dversion=$MVN_VERSION -DgeneratePom=false -Dpackaging=zip -DrepositoryId=nexus.releases -Durl=https://archiva.allence-tunisie.com/repository/maven-releases/ -Dfile=angular/angular7.zip $MAVEN_CLI_OPTS ; fi"
+  when: on_success
+  artifacts:
+  except:
+    - tags
+
+
+maven-javadoc:
+  stage: documentation
+  environment: staging
+  dependencies:
+    - maven-deploy-front-nexus
+  script:
+    - "cd projet && mvn $MAVEN_CLI_OPTS javadoc:javadoc"
+  artifacts:
+  when: on_success
+
+
+maven-release:
+  stage: release
+  environment: staging
+  only:
+    - developpement
+  except:
+    - tags
+  dependencies:
+    - maven-deploy-nexus
+  when: on_success
+  script:
+    - "if [[ $GIT_COMMENT == *\"Merge branch\"* ]]; then git checkout -B $CI_BUILD_REF_NAME && cd projet && mvn --batch-mode release:prepare -DskipTests $MAVEN_CLI_OPTS; fi"
+
+

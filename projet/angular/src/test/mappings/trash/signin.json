@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/authentificate/signin",
+    "bodyPatterns": [ {
+      "matches": ".email=(test)&."
+    }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "body": "login succes"
+  }
+}

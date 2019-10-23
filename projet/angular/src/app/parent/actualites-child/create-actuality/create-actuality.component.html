@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="addActivite">
+      <span class="titleAddActivite">Ajouter une activité</span>
+      <form #actualityForm="ngForm" class="needs-validation" novalidate (ngSubmit)="addActuality(actualityForm)">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="form-group">
+              <textarea class="form-control" id="validationMsg" name="commentaire" [(ngModel)]="actuality.commentaire" rows="5"  placeholder="Description" required></textarea>
+              <div class="invalid-feedback">
+                Entrez Votre Activité
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-9">
+            <div class="form-group file">
+              <input type="file" class="form-control-file" id="formControlFile" name="file" (change)="onFileChange($event)"  accept="image/*;capture=camera" required>
+              <label for="formControlFile" id="labelFor">{{labelText}}</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <button [disabled]="testImage==null && actualityForm.invalid  " id="button" type="submit" class="btn btn-outline-success ajoutActivite">Ajouter</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

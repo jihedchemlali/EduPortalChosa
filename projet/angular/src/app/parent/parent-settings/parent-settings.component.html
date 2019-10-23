@@ -1,0 +1,133 @@
+<app-parent-header [user]="user" [imageUrl]="imageUrl"></app-parent-header>
+<main class="container-fluid">
+  <div class="container">
+    <div class="row d-flex justify-content-center mt-4">
+      <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="row">
+          <div class="col-md-10 col-12">
+            <div class="filAriane">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a [routerLink]="['/parent/accueil']">Accueil</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    <span>Mon profil</span>
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+          <div class="col-md-2 col-12">
+            <div class="linkBackEspace"><a [routerLink]="['/parent/accueil']"><i
+              class="la la-angle-left"></i>Retour</a></div>
+          </div>
+        </div>
+        <div class="contentDefaultPage">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-11 mb-4">
+              <h2>Changer mot de passe</h2>
+            </div>
+            <div class="col-md-11 formDefault">
+              <form [formGroup]="registerForm" (ngSubmit)="updatePassword()">
+                <div class="row d-flex justify-content-center">
+                  <div class="col-md-7">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="oldPassword">Ancien mot de passe</label>
+                          <input type="password" formControlName="oldPassword" class="form-control" id="oldPassword"
+                                 aria-describedby="input-group-prepend" placeholder="" value="">
+                          <div class="alert alert-danger" *ngIf="!f.oldPassword.valid && f.oldPassword.touched">Saisir
+                            votre ancien mot de passe
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="userPassword">Nouveau mot de passe</label>
+                          <input type="password" formControlName="userPassword" class="form-control" id="userPassword"
+                                 aria-describedby="input-group-prepend" placeholder="">
+                          <div class="alert alert-danger" *ngIf="!f.userPassword.valid && f.userPassword.touched">Saisir
+                            votre nouveau mot de passe
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="confirmPassword">Confirmation de mot de passe</label>
+                          <input type="password" class="form-control" id="confirmPassword"
+                                 formControlName="confirmPassword"
+                                 aria-describedby="input-group-prepend" placeholder="">
+                          <div class="alert alert-danger"
+                               *ngIf="f.confirmPassword.touched && f.confirmPassword.value!==f.userPassword.value">Ces
+                            mots de passe ne correspondent pas essayez à nouveau
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row d-flex justify-content-center mt-4">
+                  <div class="col-md-5">
+                    <div class="row">
+                      <div class="col-md-6 mr-auto mb-3">
+                        <button [disabled]="!registerForm.valid || (f.confirmPassword.value!==f.userPassword.value)"
+                                id="submit" type="submit" class="btn save">Enregistrer
+                        </button>
+                      </div>
+                      <div class="col-md-6 ml-auto mb-3">
+                        <button id="annuler" (click)="backClicked()" type="submit" class="btn cancel">Annuler</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="contentDefaultPage">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-11 formDefault">
+                <div class="row d-flex justify-content-center mt-4">
+                  <div class="col-md-5">
+                    <div class="row" *ngIf="user.facebook_Id==null">
+                        <button id="azeaze" type="submit" class="btn save facebook" (click)="apparierCompteFacebook()">Associer mon compte Facebook</button>
+                    </div>
+                    <div class="row" *ngIf="user.facebook_Id!=null">
+                      <button id="ezaeza" type="submit" class="btn save facebook" (click)="deconnecter()">Déconnecter mon compte Facebook</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</main>
+<app-parent-footer></app-parent-footer>
+<button [hidden]="true" data-toggle="modal" id="openModalButton"
+        data-target="#modal"></button>
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Compte est déjà apparié</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Voulez-vous annuler la connexion de l'autre compte et mettre ceci ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="annuler2" data-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary" id="delete1"  (click)=associerCompte() data-dismiss="modal">Continuer</button>
+      </div>
+    </div>
+  </div>
+</div>

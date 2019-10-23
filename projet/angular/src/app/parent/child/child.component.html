@@ -1,0 +1,42 @@
+<div class="kidCards">
+  <a routerLink="./" class="deleteKid" id="deleteKid" (click)="emitChild()" data-toggle="modal" data-target="#deleteChildModal"><i
+    class="fas fa-times"></i></a>
+  <div class="photoKidCards">
+    <img src="{{imageUrl}}" id="imageUrl" routerLink="../enfants/{{child.id}}">
+  </div>
+  <div class="nameKidCards">
+    <a href="" class="editInfoKid" id="editInfoKid" (click)="emitChild()" data-toggle="modal" data-target="#modifierEnfantModal"><i class="fas fa-pen"></i></a>
+    <h4>{{child.prenom}}</h4>
+  </div>
+  <div class="ageKidCards">
+    <h4>{{child.birth_date | age}}</h4>
+  </div>
+  <div class="buttonCardKid">
+    <div *ngIf="child.status==='ACCEPTED'||child.status==='IGNORED'">
+      <div class="buttonSuivie">
+        <a routerLink="." id="delete" class="delete mt-0" (click)="emitChild()" data-toggle="modal"
+           data-target="#retirerDuCentreModal">Retirer du centre</a>
+      </div>
+      <div class="buttonAddActivite">
+        <a class="ajoutActivite" id="ajoutActivite4" [routerLink]="['../enfants/'+child.id]">Ajouter des actualités</a>
+      </div>
+    </div>
+    <div *ngIf="child.status==='ONLOAD'">
+      <div class="buttonSuivie">
+        <a routerLink="." class="retirer" id="retirer" (click)="cancelDemand()">Annuler la demande</a>
+      </div>
+      <div class="buttonAddActivite">
+        <a class="ajoutActivite" id="ajoutActivite" [routerLink]="['../enfants/'+child.id]">Ajouter des actualités</a>
+      </div>
+    </div>
+    <div *ngIf="child.status==='NEW'||child.status==='REFUSED'">
+      <div class="buttonSuivie">
+        <a routerLink="." class="adherer" id="adherer2" (click)="emitChild()" data-toggle="modal" data-target="#adhererChildModal">Adhérer
+          à un jardin d’enfant</a>
+      </div>
+      <div class="buttonAddActivite">
+        <a class="ajoutActivite" id="ajoutActivite3" [routerLink]="['../enfants/'+child.id]">Ajouter des actualités</a>
+      </div>
+    </div>
+  </div>
+</div>

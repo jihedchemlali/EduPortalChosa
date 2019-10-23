@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/users"
+  },
+  "response": {
+    "status": 400,
+    "bodyFileName": "inscription/inscription1.bad.request.json"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "DELETE",
+    "urlPattern": "/api/users"
+  },
+  "response":{
+    "status": 200,
+    "body": "DELETED!"
+  }
+}

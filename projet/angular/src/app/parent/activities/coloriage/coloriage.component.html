@@ -1,0 +1,47 @@
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+  <div class="row">
+    <div class="col-md-10 col-12">
+      <div class="filAriane">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/parent/profil']">Mon profil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              <span>Coloriage</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="col-md-2 col-12">
+      <div class="linkBackEspace"><a [routerLink]="['/parent/accueil']"><i
+        class="la la-angle-left"></i>Retour</a></div>
+    </div>
+  </div>
+  <div class="contentDefaultPage" *ngIf="activities.length>0; else emptyList">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12 mb-4">
+        <h2>Coloriage</h2>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-3 mb-4"  *ngFor="let activity of activities">
+              <div class="activitesEnfants">
+                <!--<img src="../../../../assets/parent/img/activites-enfants/coloriage/coloriage-2.jpg"/>-->
+                <img src="{{authInterceptor.BASE_URL +'/files/'+ activity.file}}" alt="">
+                <div class="mask">
+                  <a href="{{authInterceptor.BASE_URL +'/files/'+ activity.file}}">Télécharger</a>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #emptyList>
+    <div class="row">
+      <div class="alert alert-danger col-12">
+        Liste des activités est vide actuellement.
+      </div>
+    </div>
+  </ng-template>
+</div>

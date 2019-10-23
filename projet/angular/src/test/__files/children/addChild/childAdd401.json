@@ -1,0 +1,7 @@
+{
+  "error": {
+    "errorCode":2003,
+    "errorMessage":"Sorry, you have to be authentified",
+    "requestedURI":"/api/children"
+  }
+}

@@ -1,0 +1,101 @@
+<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Widgets</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Widgets</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <h5 class="mb-2 mt-4">Widgets</h5>
+      <div class="row">
+        <div class="col-md-2 mt-4" *ngFor="let activity of activities">
+          <div class="cadre small-box overlay text-center">
+            <img class="img-fluid" src="{{authInterceptor.BASE_URL +'/files/'+ activity.file}}" alt="" *ngIf="activity.file !=null">
+            <img class="img-fluid" src="../../../assets/admin/img/defaultUserPicture.png" alt="" *ngIf="activity.file ==null">
+
+            <div class="alert alert-info alert-dismissible">
+              <h5><div class="pull-left">{{activity.date_publication | date:'shortDate'}}</div><div class="pull-right">{{activity.age}} ans</div></h5>
+              <button type="button" class="btn btn-default btn-sm" (click)="deleteImage(activity)">
+                <span class="fa fa-trash"></span></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 mt-4">
+          <div class="cadre small-box overlay text-center">
+            <img class="img-fluid cursor-pointer" src="../../../../assets/admin/img/icon-AjoutDefault.png" alt=""
+                 data-toggle="modal" data-target="#modal-add-coloriage"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="modal fade" id="modal-add-coloriage">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Ajout activité</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"  (click)="reset()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #activityForm="ngForm">
+        <div class="modal-body">
+          <div class="card-body">
+            <div class="form-group">
+              <label>Date de publication:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                      </span>
+                </div>
+                <input type="date" class="form-control float-right" id="reservation" required
+                       name="date_publication" [(ngModel)]="activity.date_publication">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Date de publication:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="fas fa-calendar-check"></i>
+                      </span>
+                </div>
+                <input type="number" class="form-control float-right" id="age" name="age" [(ngModel)]="activity.age">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Date and time range:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="far fa-file-image"></i></span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="exampleInputFile" name="file" (change)="onFileChange($event)">
+                  <label class="custom-file-label" for="exampleInputFile">{{label}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="reset()">Close</button>
+          <button type="submit" class="btn btn-primary" [disabled]="label=='Choisir une image'" (click)="createActivity()" data-dismiss="modal">Enregistrer
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

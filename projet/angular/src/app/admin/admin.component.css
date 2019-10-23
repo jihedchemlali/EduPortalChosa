@@ -1,0 +1,14 @@
+/*.margin_0{*/
+  /*width: 100% !important;*/
+  /*margin: 0px !important;*/
+/*}*/
+
+.body_component{
+  width: 100% !important;
+  /*margin: 0px !important;*/
+  min-height: 100% !important;
+}
+.layout-navbar-fixed .wrapper .content-wrapper {
+  margin-top: 57px;
+  margin-bottom: 0 !important;
+}

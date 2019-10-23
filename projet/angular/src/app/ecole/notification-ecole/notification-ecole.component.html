@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="row">
+      <div class="col-md-9 col-12">
+        <div class="filAriane">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a [routerLink]="['/ecole/accueil']">Mon profil</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Notifications: <span></span></li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-12">
+        <div class="linkBackEspace"><a [routerLink]="['/ecole/accueil']"><i
+          class="la la-angle-left"></i>Retour</a></div>
+      </div>
+    </div>
+    <div class="row" *ngFor="let notification of notifications | orderBy:'-creationDate'">
+      <div class="col-md-12">
+        <div class="activiteKid" routerLink="{{notification.url}}" [ngClass]="{'non-lus': notification.status=='NON_LUS', 'lus': notification.status=='LUS'}">
+          <div class="topActiviteKid">
+            <i class="far fa-calendar-alt"></i>
+            {{notification.type}}
+          </div>
+          <div class="float-right">
+            <div class="breadcrumb-item active">
+              <p>{{notification.creationDate | timeAgo}}</p>
+            </div>
+          </div>
+          <p>{{notification.title}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

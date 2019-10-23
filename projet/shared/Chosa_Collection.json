@@ -1,0 +1,1761 @@
+{
+	"info": {
+		"_postman_id": "a37854b4-abcd-47a1-a22b-520f1823e206",
+		"name": "Chosa_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "authentification",
+			"item": [
+				{
+					"name": "authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1f21ecac-9e0a-4aa7-b36f-c88a9d25b20c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"email\": \"ammar.chebbi@allence-tunisie.com\",\n\"userPassword\": \"azeaze\"\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/authenticate/signin",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"authenticate",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "children",
+			"item": [
+				{
+					"name": "get children",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"id\": 2,\n        \"name\": \"dddd\",\n        \"logo\": 1,\n        \"address\": \"dddddd\",\n        \"country\": \"ddddd\",\n        \"phone\": \"dddd\",\n        \"status\": \"VALIDATE\",\n         \"manager\": \"1\"\n    }"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/children/?offset=1&size=2",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"children",
+								""
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get child by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"id\": 2,\n        \"name\": \"dddd\",\n        \"logo\": 1,\n        \"address\": \"dddddd\",\n        \"country\": \"ddddd\",\n        \"phone\": \"dddd\",\n        \"status\": \"VALIDATE\",\n         \"manager\": \"1\"\n    }"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/children/1",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"children",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add child",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"prenom\": \"zzzzzzz\",\n    \"birth_date\": \"2019-04-29\",\n    \"sexe\": \"string\"\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/children/",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"children",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modify child",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"id\": 2,\n    \"parent\": 1,\n    \"prenom\": \"zzzzzzz\",\n    \"birth_date\": \"2019-04-29\",\n    \"sexe\": \"string\",\n    \"picture\":1\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/children/2",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"children",
+								"2"
+							]
+						},
+						"description": "updateChild"
+					},
+					"response": []
+				},
+				{
+					"name": "delete child",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"id\": 1,\n    \"age\": 155,\n    \"status\": \"PUBLIC\",\n    \"date_publication\": \"2019-04-01\"\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/children/1",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"children",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "training-center",
+			"item": [
+				{
+					"name": "get centers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"id\": 2,\n    \"parent\": 1,\n    \"prenom\": \"zzzzzzz\",\n    \"birth_date\": \"2019-04-29\",\n    \"sexe\": \"string\",\n    \"picture\":1\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/centers/?offset=1&size=5",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"centers",
+								""
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						},
+						"description": "List of training centers"
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"id\": 2,\n    \"parent\": 1,\n    \"prenom\": \"zzzzzzz\",\n    \"birth_date\": \"2019-04-29\",\n    \"sexe\": \"string\",\n    \"picture\":1\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/centers/1",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"centers",
+								"1"
+							]
+						},
+						"description": "get training center by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "add center",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"name\": \"rararapaa\",\n    \"address\": \"jjjj\",\n    \"country\": \"jjjj\",\n    \"phone\": \"YYYY\",\n    \"status\": \"REQUEST\"\n\t\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/centers/",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"centers",
+								""
+							]
+						},
+						"description": "save training center"
+					},
+					"response": []
+				},
+				{
+					"name": "modify center",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":1,\n    \"name\": \"rararapaa\",\n    \"address\": \"jjjj\",\n    \"country\": \"jjjj\",\n    \"phone\": \"YYYY\",\n    \"status\": \"REQUEST\",\n    \"logo\": \"1\"\n\t\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/centers/1",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"centers",
+								"1"
+							]
+						},
+						"description": "modifier center"
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":1,\n    \"name\": \"rararapaa\",\n    \"address\": \"jjjj\",\n    \"country\": \"jjjj\",\n    \"phone\": \"YYYY\",\n    \"status\": \"REQUEST\",\n    \"logo\": \"1\"\n\t\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/activities/?offset=1&size=10",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"activities",
+								""
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						},
+						"description": "liste of activities"
+					},
+					"response": []
+				},
+				{
+					"name": "delete center",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"id\": 1,\n    \"age\": 155,\n    \"status\": \"PUBLIC\",\n    \"date_publication\": \"2019-04-01\"\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/centers/1",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"centers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "activities",
+			"item": [
+				{
+					"name": "get by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":1,\n    \"name\": \"rararapaa\",\n    \"address\": \"jjjj\",\n    \"country\": \"jjjj\",\n    \"phone\": \"YYYY\",\n    \"status\": \"REQUEST\",\n    \"logo\": \"1\"\n\t\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/activities/1",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"activities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":1,\n    \"name\": \"rararapaa\",\n    \"address\": \"jjjj\",\n    \"country\": \"jjjj\",\n    \"phone\": \"YYYY\",\n    \"status\": \"REQUEST\",\n    \"logo\": \"1\"\n\t\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/activities/?offset=1&size=10",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"activities",
+								""
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						},
+						"description": "list of activities"
+					},
+					"response": []
+				},
+				{
+					"name": "add activity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n\n        \"age\": 1,\n        \"status\": \"PUBLIC\",\n        \"date_publication\": \"2019-04-01\"\n }"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/activities/",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"activities",
+								""
+							]
+						},
+						"description": "add activity"
+					},
+					"response": []
+				},
+				{
+					"name": "modify activity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"id\": 1,\n    \"age\": 155,\n    \"status\": \"PUBLIC\",\n    \"date_publication\": \"2019-04-01\"\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/activities/1",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"activities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete activity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"id\": 1,\n    \"age\": 155,\n    \"status\": \"PUBLIC\",\n    \"date_publication\": \"2019-04-01\"\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/activities/1",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"activities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "actualities",
+			"item": [
+				{
+					"name": "find actuality by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n\t\t\"id\": 1,\n        \"age\": 1,\n        \"status\": \"PUBLIC\",\n        \"date_publication\": \"2019-04-01\"\n }"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/actualities/1",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"actualities",
+								"1"
+							]
+						},
+						"description": "find by id"
+					},
+					"response": []
+				},
+				{
+					"name": "get all actualities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n\t\t\"id\": 1,\n        \"age\": 1,\n        \"status\": \"PUBLIC\",\n        \"date_publication\": \"2019-04-01\"\n }"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/actualities/?offset=1&size=10",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"actualities",
+								""
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						},
+						"description": "find all actualitites"
+					},
+					"response": []
+				},
+				{
+					"name": "add actuality",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n        \"commentaire\": \"oooo\",\n        \"type\": \"ATTENTION\"\n    }"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/actualities/",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"actualities",
+								""
+							]
+						},
+						"description": "add actualities"
+					},
+					"response": []
+				},
+				{
+					"name": "modify actuality",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n        \"id\": 1,\n        \"commentaire\": \"oooo\",\n        \"type\": \"ATTENTION\",\n        \"file\": 1,\n        \"child\": 9\n    }"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/actualities/1",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"actualities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete actuality",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"id\": 1,\n    \"age\": 155,\n    \"status\": \"PUBLIC\",\n    \"date_publication\": \"2019-04-01\"\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/actualities/1",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"actualities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"id\": 1,\n        \"commentaire\": \"oooo\",\n        \"type\": \"ATTENTION\",\n        \"file\": 1,\n        \"child\": 9\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/users/?offset=1&size=10",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						},
+						"description": "list of users"
+					},
+					"response": []
+				},
+				{
+					"name": "modify user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 2,\n    \"user_name\": \"test\",\n    \"email\": \"ammar.chebbi@test-pppp.com\",\n    \"userPassword\": \"test\",\n    \"birth_date\": \"2002-11-21\",\n    \"user_picture_file\": 1,\n    \"adress\": \"222\",\n    \"status\": \"SIGNUP\",\n    \"country\": \"222\",\n    \"phone\": \"1222\",\n    \"google_Id\": 1,\n    \"facebook_Id\": 1\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/users/2",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						},
+						"description": "find by id"
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 2,\n    \"user_name\": \"rtrtrt\",\n    \"email\": \"ammar.chebbi@allence-tunisie.com\",\n    \"status\": \"VALIDATE\",\n    \"userPassword\": \"test\",\n    \"birth_date\": \"2002-11-21\",\n    \"user_picture_file\": 1,\n    \"adress\": \"222\",\n    \"country\": \"222\",\n    \"phone\": \"1222\",\n    \"google_Id\": 1,\n    \"facebook_Id\": 1\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/users/1",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						},
+						"description": "update user"
+					},
+					"response": []
+				},
+				{
+					"name": "add user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_name\": \"test\",\n    \"email\": \"ammar.chebbi@test-pppp.com\",\n    \"userPassword\": \"test\",\n    \"birth_date\": \"2002-11-21\",\n    \"user_picture_file\": 1,\n    \"adress\": \"222\",\n    \"status\": \"SIGNUP\",\n    \"country\": \"222\",\n    \"phone\": \"1222\",\n    \"google_Id\": 1,\n    \"facebook_Id\": 1\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/users",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"id\": 1,\n    \"age\": 155,\n    \"status\": \"PUBLIC\",\n    \"date_publication\": \"2019-04-01\"\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/users/2",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "emails",
+			"item": [
+				{
+					"name": "validate mail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"id\": 1,\n        \"commentaire\": \"oooo\",\n        \"type\": \"ATTENTION\",\n        \"file\": 1,\n        \"child\": 9\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/emails/validation?token=155747911&email=ammar.chebbi@ppp-pppp.com",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"emails",
+								"validation"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "155747911"
+								},
+								{
+									"key": "email",
+									"value": "ammar.chebbi@ppp-pppp.com"
+								}
+							]
+						},
+						"description": "activate account"
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569937f3-0939-4a2f-b991-d88d00db8209",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"email\": \"ammar.chebbi@allence-tunisie.com\"\n}"
+						},
+						"url": {
+							"raw": "https://chosa-api.allence-tunisie.com/api/authenticate/logout",
+							"protocol": "https",
+							"host": [
+								"chosa-api",
+								"allence-tunisie",
+								"com"
+							],
+							"path": [
+								"api",
+								"authenticate",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,212 @@
+    <div class="row">
+      <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+        <div class="row">
+          <div class="col-md-9 col-12">
+            <div class="filAriane">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a [routerLink]="['/ecole/accueil']">Mon profil</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Enfant: <span>{{child?.prenom}}</span></li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-12">
+            <div class="linkBackEspace"><a [routerLink]="['/ecole/accueil']"><i
+              class="la la-angle-left"></i>Retour</a></div>
+          </div>
+        </div>
+
+        <app-create-actuality-ecole></app-create-actuality-ecole>
+
+        <div class="row" *ngFor="let actuality of actualities | orderBy:'-creationDate' " app-actuality  [actuality]="actuality" [user]="user" [parent]="user" (membre)="parentDeleteChildActualities($event)">
+        </div>
+
+      </div>
+
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+
+
+        <div class="kidCards stickyElement">
+
+          <div class="photoKidCards">
+            <img src="{{pictureChild}}" alt="">
+          </div>
+          <div class="nameKidCards">
+            <h4>{{child?.prenom}}</h4>
+          </div>
+          <div class="ageKidCards" *ngIf="child.birth_date!=null">
+            <h4>{{child?.birth_date | age}}</h4>
+          </div>
+          <div class="buttonCardKid">
+            <div class="buttonSuivie">
+              <a *ngIf="child.status==='ACCEPTED'" id="retirer" href="" class="retirer" data-toggle="modal" data-target="#retirerDuCentreModal">Retirer du centre</a>
+              <a *ngIf="child.status==='ACCEPTED'" href="delete" class="delete" data-toggle="modal" data-target="#deleteChildModal" >Supprimer votre enfant</a>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+    <!-- Modal Enfant -->
+
+    <div class="modal fade modalChosa" id="retirerDuCentreModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Retirer du suivie</h5>
+            <button type="button" class="closeModal" data-dismiss="modal" aria-label="Close">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <img src="../../../assets/ecole/img/icon-RetirerDefault.png" alt="">
+            <p class="mt-4">Êtes vous sûr de vouloir retirer {{child.prenom}}?</p>
+          </div>
+          <div class="modal-footer">
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="col-md-6 mr-auto mb-3">
+                    <button type="button" class="btn btnCancelModal" data-dismiss="modal" id="retirerAnnuler">Annuler</button>
+                  </div>
+                  <div class="col-md-6 ml-auto mb-3">
+                    <button type="button" class="btn btnDeleteKidModal" (click)=removeChildFromEcole() data-dismiss="modal" id="retirerSupprimer">Retirer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade modalChosa" id="deleteChildModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle2">Suppression d'un enfant</h5>
+            <button type="button" class="closeModal" data-dismiss="modal" aria-label="Close">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <img src="../../../assets/parent/img/icon-trashDefault.png" alt="">
+            <p class="mt-4">Êtes vous sûr de supprimer {{child.prenom}} ?</p>
+          </div>
+          <div class="modal-footer">
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="col-md-6 mr-auto mb-3">
+                    <button type="button" class="btn btnCancelModal" data-dismiss="modal" id="buttonAnnuler">Annuler</button>
+                  </div>
+                  <div class="col-md-6 ml-auto mb-3">
+                    <button type="button" class="btn btnDeleteKidModal" (click)=deleteChild() data-dismiss="modal" id="buttonSupprimer">Supprimer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Modal -->
+
+    <div class="modal fade modalChosa" id="exampleModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Supprimer l'actualité</h5>
+            <button type="button" class="closeModal" data-dismiss="modal" aria-label="Close">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <img src="../../../assets/parent/img/icon-trashDefault.png" alt="">
+            <p class="mt-4">Voulez-vous vraiment supprimer l'article?</p>
+          </div>
+          <div class="modal-footer">
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="col-md-6 mr-auto mb-3">
+                    <button type="button" class="btn btnCancelModal" data-dismiss="modal" id="annuler2">Annuler</button>
+                  </div>
+                  <div class="col-md-6 ml-auto mb-3">
+                    <button type="button" class="btn btnDeleteKidModal" (click)=deleteActualite(selectedActuality) data-dismiss="modal" id="delete1">Réfuser</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade modalChosa editForm" id="modifierActualityModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle3">Modifier les informations </h5>
+            <button type="button" class="closeModal" data-dismiss="modal" aria-label="Close" (click)="reset()">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <div class="row formDefault">
+
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="validationName">Modifier votre commentaire</label>
+                  <input type="text" class="form-control" id="validationName"
+                         aria-describedby="input-group-prepend" placeholder="" name="prenom" [(ngModel)]="selectedActuality.commentaire" value="{{selectedActuality.commentaire}}" >
+                </div>
+              </div>
+
+
+            </div>
+            <div class="modal-footer">
+              <div class="row d-flex justify-content-center">
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 mr-auto mb-3">
+                      <button id="annulerMod" type="button" class="btn btnCancelModal" data-dismiss="modal" (click)="reset()">Annuler</button>
+                    </div>
+                    <div class="col-md-6 ml-auto mb-3">
+                      <button id="enregistrer2" type="button" class="btn btnAddKidModal" (click)=updateActuality() data-dismiss="modal">Modifier</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

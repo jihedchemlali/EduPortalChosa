@@ -1,0 +1,33 @@
+body {
+  font-family: 'Nunito-Regular',Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  margin: 0px !important;
+  background-color: #f7f0f7;
+}
+#loading-bar-spinner {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: #a83995;
+}
+
+.spinner-icon {
+  width: 40px !important;
+  height: 40px !important;
+  border: 5px solid transparent !important;
+  border-top-color: inherit !important;
+  border-left-color: inherit !important;
+  border-radius: 50% !important;
+  -webkit-animation: .4s linear infinite loading-bar-spinner !important;
+  animation: .4s linear infinite loading-bar-spinner !important;
+
+}
+
+.bar {
+  background: #6fc8bc !important;
+  height: 5px !important;
+}

@@ -1,0 +1,78 @@
+<div class="container-fluid bgHeaderContainer ">
+  <div class="container-fluid bgHeader d-flex align-items-center justify-content-center">
+    <div class="container headerTop d-flex align-items-stretch">
+      <div class="row d-flex align-items-center justify-content-between h-100 w-100">
+        <div class="col-xl-2 col-lg-2 col-md-3 col-12">
+          <div class="logoEspace">
+            <a [routerLink]="['/']">
+              <img src="../../../assets/parent/img/chosa-white.svg" alt="">
+            </a>
+          </div>
+        </div>
+        <div class="col-xl-10 col-lg-10 col-md-9 col-12 d-flex justify-content-end">
+
+          <form  (ngSubmit)="clickSearchText()">
+            <div class="form-group rechercheHeader mr-5">
+              <input type="text" class="form-control dropdown-toggle" id="recherche" name="search" placeholder="Rechercher..."
+                     [(ngModel)]="searchText"  (keyup)="searchEcole()"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  autocomplete="off">
+              <div class="dropdown-menu">
+                <div class="suggestBody">
+                  <a href="javascript:void(0)" (click)="clickSearchText()" *ngFor="let center of centers" >{{center.name}}</a>
+
+                </div>
+              </div>
+            </div>
+          </form>
+
+
+          <div class="dropdown notifContent">
+            <a href="" class="notifHeader d-flex align-items-center justify-content-center mr-5" role="button"
+               id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="la la-bell"></i>
+              <span class="infoNotif d-flex align-items-center justify-content-center" *ngIf="sizeNotifications>0">{{sizeNotifications}}</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+              <div class="notifTop">
+                Vos notifications
+              </div>
+              <div class="notifBody" *ngFor="let notification of notifications; let i = index;"  id="notificationNON_LUS{{notification.id}}" (click)="clearNotification(notification)"
+                   [ngClass]="{'non-lus': notification.status=='NON_LUS' && i<5, 'lus': notification.status=='LUS' && i<5}">
+                <a href="#">{{notification.title}}</a>
+              </div>
+              <div class="d-flex justify-content-center mt-3">
+                <button type="button" class="btn btn-primary seeAll" routerLink="/parent/notifications">Voir tous</button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="profilHeader d-flex align-items-center">
+            <span class="nameProfil mr-2">Bonjour {{user.prenom}} {{user.nom}}</span>
+            <div class="photoProfil mr-2"><img src="{{imageUrl}}" alt=""></div>
+            <div class="dropdown">
+              <a class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                 aria-expanded="false">
+                <i class="fas fa-angle-down"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <div class="profilDropdown d-flex align-items-center pr-3 pl-3 pt-3 pb-3 mb-2">
+                  <div class="photoProfilDropdown mr-3"><img src="{{imageUrl}}" alt=""></div>
+                  <span class="nameProfilDropdown">{{user.prenom}} {{user.nom}}</span>
+                </div>
+                <a class="LinkDropdownProfil d-flex align-items-center" id="profil" routerLink="/parent/profil"><i class="la la-user pr-2"></i> Mon
+                  profil</a>
+                <a class="LinkDropdownMsg d-flex align-items-center" href="#"><i class="la la-envelope-o pr-2"></i>
+                  Messages</a>
+                <a class="LinkDropdownSetting d-flex align-items-center" id="parametre" routerLink="/parent/parametre"><i class="la la-gear pr-2"></i>
+                  Paramètres</a>
+                <div class="d-flex justify-content-center mt-3">
+                  <button type="submit" class="btn btn-primary logoutProfil" (click)="logout()">Déconnexion</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

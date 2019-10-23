@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "PATCH",
+    "urlPattern": "/api/users"
+  },
+  "response":{
+    "status": 200,
+    "body": "waiting for update"
+  }
+}

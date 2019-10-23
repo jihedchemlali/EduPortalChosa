@@ -1,0 +1,120 @@
+<div class="row mt-4">
+  <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+    <div class="row">
+      <div class="col-md-9 col-12">
+        <div class="filAriane">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a [routerLink]="['/parent/accueil']">Mon profil</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Enfant: <span>{{child?.prenom}}</span>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <div class="col-md-3 col-12">
+        <div class="linkBackEspace">
+          <a [routerLink]="['/parent/accueil']"><i class="la la-angle-left"></i>Retour</a>
+        </div>
+      </div>
+    </div>
+
+    <app-create-actuality></app-create-actuality>
+
+    <div class="row" *ngFor="let actuality of actualities | orderBy:'-creationDate' " app-actuality-element
+         [actuality]="actuality" [user]="user" [parent]="user" (membre)="parentDeleteActualityChild($event)">
+    </div>
+    <div class="row">
+    </div>
+  </div>
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+    <div class="kidCards stickyElement">
+
+      <div class="photoKidCards">
+        <img src="{{pictureChild}}" alt="">
+      </div>
+      <div class="nameKidCards">
+        <h4>{{child?.prenom}}</h4>
+      </div>
+      <div class="ageKidCards">
+        <h4>{{child?.birth_date | age}}</h4>
+      </div>
+      <div class="ageKidCards">
+        <h4>{{ecole?.name}}</h4>
+      </div>
+      <div class="buttonCardKid">
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">voulez-vous vraiment supprimer l'article? </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Supprimer cette actualité!
+      </div>
+      <div class="modal-footer">
+        <button id="annuler2" type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button id="supprimer2" type="button" class="btn btn-primary"  (click)=deleteActualite(selectedActuality) data-dismiss="modal">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade modalChosa editForm" id="modifierActualityModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle3">Modifier les informations </h5>
+        <button type="button" class="closeModal" data-dismiss="modal" aria-label="Close" (click)="reset()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row formDefault">
+
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="validationName">Modifier votre commentaire</label>
+              <input type="text" class="form-control" id="validationName"
+                     aria-describedby="input-group-prepend" placeholder="" name="prenom" [(ngModel)]="selectedActuality.commentaire" value="{{selectedActuality.commentaire}}" >
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6 mr-auto mb-3">
+                <button id="annulerMod" type="button" class="btn btnCancelModal" data-dismiss="modal" (click)="reset()" >Annuler</button>
+              </div>
+              <div class="col-md-6 ml-auto mb-3">
+                <button id="enregistrer2" type="button" class="btn btnAddKidModal" (click)=updateActuality() data-dismiss="modal">Modifier</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>

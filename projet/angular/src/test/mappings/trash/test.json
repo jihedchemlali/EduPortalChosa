@@ -1,0 +1,11 @@
+{
+	"request": {
+		"method": "GET",
+    "urlPattern": "/api/users"
+  },
+	"response":{
+		"status": 200,
+		"body": "fine!",
+    "statusMessage": "Everything was just fine!"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "request": {
+    "urlPattern": "/api/usersm",
+    "method": "POST",
+    "bodyPatterns": [{
+      "matchesJsonPath" : "$[?(@.email == 'utilisateur non authentifié')]['name']"
+    }]
+  },
+  "response": {
+    "status": 200
+  }
+}

@@ -1,0 +1,45 @@
+<div class="row mt-4">
+  <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+    <div class="row">
+      <div class="col-md-9 col-12">
+        <div class="filAriane">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a [routerLink]="['/parent/accueil']">Mon profil</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                <!--                Enfant: <span>{{child?.prenom}}</span>-->
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <div class="col-md-3 col-12">
+        <div class="linkBackEspace">
+          <a [routerLink]="['/parent/accueil']"><i class="la la-angle-left"></i>Retour</a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row" *ngFor="let ecole of ecoles| orderBy:'-name' ">
+      <div class="col-md-12">
+        <div class="activiteKid">
+          <div class="topActiviteKid">
+            <i class="far fa-calendar-alt"></i>
+            {{ecole.name}}
+          </div>
+          <br>
+          <br>
+          <p>
+
+          </p>
+          <img src="{{authInterceptor.BASE_URL +'/files/'+ ecole.logo}}" alt="">
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+    </div>
+  </div>
+
+</div>

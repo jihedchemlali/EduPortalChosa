@@ -1,0 +1,41 @@
+<div class="detailEspace stickyElement">
+  <div class="photoNameDetailEspace">
+    <div class="nameDetailEspace" id="ecoleName">{{ecole?.name}}</div>
+    <div class="photoDetailEspace">
+      <a class="editPhotoDetailEspace" (click)="photoInput.click()" routerLink="." >
+        <i class="fas fa-pen" data-toggle="tooltip" data-placement="top" title="Changer la photo"></i>
+      </a>
+      <div class="photoProfil mr-2">
+        <img src="{{imageUrl}}" alt="" id="imageUrl">
+      </div>
+    </div>
+  </div>
+  <form class="d-none">
+    <input #photoInput type="file" accept='image/*'
+           name="file" required (change)="uploadPicture($event)">
+  </form>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="infoEspace">
+    <ul>
+      <li *ngIf="ecole.address!= null">
+        <img src="../../assets/ecole/img/map.svg" alt="" id="address">{{ecole?.address}} , {{ecole?.ville}}
+      </li>
+      <li><a > <img src="../../assets/ecole/img/globe.svg" alt="" id="name"> {{ecole?.country}}</a></li>
+      <li *ngIf="user.email!= null"><a [href]="'mailto:' + user?.email"><img src="../../assets/ecole/img/mail.svg"
+                                                                             alt="" id="email"> {{user?.email}}</a></li>
+      <li *ngIf="ecole.phone!= null"><img src="../../assets/ecole/img/telephone.svg" alt="" id="phone"> {{ecole?.phone}}
+      </li>
+      <li *ngIf="user.facebook_Id!= null"><a href="https://facebook.com/{{user?.facebook_Id}}" target="_blank"><img src="../../assets/ecole/img/facebook.svg"
+                                                                              id="fb" alt="">
+        {{user.facebook_Id}}</a></li>
+      <li *ngIf="user.google_Id!= null"><a href=""><img src="../../assets/ecole/img/linkedin.svg"
+                                                        alt="">{{user.google_Id}}</a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+

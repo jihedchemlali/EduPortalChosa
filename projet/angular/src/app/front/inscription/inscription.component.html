@@ -1,0 +1,101 @@
+<div class="login">
+  <div class="container-login">
+    <div class="login-left">
+    </div>
+    <div class="wrap-login signIn">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-xl-6 col-lg-6 col-md-10 col-sm-10 col-10">
+          <div class="row ">
+            <div class="col-md-12 d-flex justify-content-center mb-5 ">
+              <div class="logoLogin">
+                <img src="../../../assets/front/img/chosa-color.svg" alt="">
+              </div>
+            </div>
+          </div>
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="needs-validation mt-5">
+            <div class="row">
+              <div class="col-md-12 col-12">
+                <div class="form-group">
+                  <input class="form-control" formControlName="nom" id="nom" aria-describedby="input-group-prepend"
+                         placeholder="Nom" required>
+                  <div class="invalid-feedback">
+                    Entrez Votre Nom
+                  </div>
+                  <div class="alert alert-danger" *ngIf="f.nom.invalid && submitted ">champ oubligatoire</div>
+                  <div class *ngIf="!f.nom.valid && f.nom.touched">champ oubligatoire</div>
+                </div>
+              </div>
+              <div class="col-md-12 col-12">
+                <div class="form-group">
+                  <input class="form-control" formControlName="prenom"  id="prenom" aria-describedby="input-group-prepend"
+                         placeholder="Prénom" required>
+                  <div class="invalid-feedback">
+                    Entrez Votre Prénom
+                  </div>
+                  <div class="alert alert-danger" *ngIf="f.prenom.invalid && submitted">champ oubligatoire</div>
+                </div>
+              </div>
+              <div class="col-md-12 col-12">
+                <div class="form-group">
+                  <input type="email" ngModel [email]="true" class="form-control" formControlName="email" id="email"
+                         placeholder="Adresse email" required autocomplete="off" [pattern]="emailPattern">
+                  <div class="invalid-feedback">
+                    Entrez une adresse mail valid
+                  </div>
+                  <div class="alert alert-danger" *ngIf="f.email.invalid && submitted">veuillez renseigner ce champ
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-12">
+                <div class="form-group">
+                  <input type="password" class="form-control" formControlName="userPassword" id="userPassword"
+                         aria-describedby="input-group-prepend" placeholder="Mot de passe" required minlength="3">
+                  <div class="invalid-feedback">
+                    Entrez Votre Mot de passe
+                  </div>
+                  <div class="alert alert-danger" *ngIf="f.userPassword.invalid && submitted">veuillez renseigner ce
+                    champ
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-12">
+                <div class="form-group">
+                  <input type="password" class="form-control" formControlName="confirmPassword" id="confirmPassword"
+                         aria-describedby="input-group-prepend" placeholder="Confirmation de votre mot de passe" required minlength="3">
+                  <div class="invalid-feedback">
+                    Entrez de nouveau Votre Mot de passe
+                  </div>
+                  <div class="alert alert-danger" *ngIf="f.confirmPassword.touched && f.confirmPassword.value!==f.userPassword.value">Ces mots de passe ne correspondent pas essayez à nouveau</div>
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-12">
+                <div class="custom-control custom-checkbox">
+                  <div class="form-group">
+                    <input type="checkbox" formControlName="accepted" [checked]="false" [(ngModel)]="accepted" id="rad1"
+                           required class="custom-control-input">
+                    <label class="custom-control-label" for="rad1" [ngStyle]="style()">
+                      <span id="term_checkbbox" [ngStyle]="setStyle()"> <span></span></span>J'accepte
+                      les conditions générales de vente et d'utilisation</label>
+                    <div *ngIf="submitted && !accepted" class="alert alert-danger">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row d-flex mt-4 align-items-center justify-content-center">
+                <button [disabled]="!registerForm.valid || (f.confirmPassword.value!==f.userPassword.value)" type="submit" id="submitButton" class="btn btn-outline-success cnx ">
+                  Inscription
+                </button>
+              </div>
+            </div>
+            <p class="mt-4 text-center">Vous avez déjà un compte?
+              <a [routerLink]="['/login']">Connectez-vous ici</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

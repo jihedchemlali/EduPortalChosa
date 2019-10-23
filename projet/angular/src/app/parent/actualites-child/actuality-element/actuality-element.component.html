@@ -1,0 +1,26 @@
+<div class="col-md-12">
+  <div class="activiteKid">
+    <a routerLink= "./" *ngIf="actuality.user==userId" class="deleteActiciteKid" data-toggle="modal" data-target="#exampleModal" (click)="emitActuality()"><i class="fas fa-times"></i></a>
+    <div class="topActiviteKid">
+      <div class="dateTopActiviteKid">
+      <i class="far fa-calendar-alt"></i>
+      {{actuality?.creationDate | timeAgo}}
+      <a  href="" *ngIf="actuality.user==userId" class="editActiciteKid" data-toggle="modal" data-target="#modifierActualityModal" (click)="emitActuality()"><i class="fas fa-pen"></i></a>
+    </div>
+      <div class="publishLocationTopActiviteKid">
+        <a href="https://www.google.com/maps/dir/{{actuality.latitude}},{{actuality.longitude}}" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
+        Publier par:
+        <span *ngIf="actuality.user==userId">{{user?.nom}}</span>
+        <span *ngIf="actuality.user!=userId">{{parent?.nom}}</span>
+      </div>
+    </div>
+    <br>
+    <br>
+    <p>
+      {{actuality?.commentaire}}
+    </p>
+    <img  src="{{imageUrl}}" alt="">
+  </div>
+
+</div>
+

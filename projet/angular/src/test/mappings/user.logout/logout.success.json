@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/authenticate/logout"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "text/plain",
+      "Set-Cookie": ["Authorization=;Version=1;Comment=;Path=/;Max-Age=0",
+        "Refresh=;Version=1;Comment=;Path=/;Max-Age=0",
+        "Roles=;Version=1;Comment=;Path=/;Max-Age=0"],
+      "Cache-Control": "no-cache"
+    }
+  }
+}
